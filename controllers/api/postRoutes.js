@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
+const { Post } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -24,13 +24,21 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    console.log("1")
     const newPost = await Post.update({
       ...req.body
     },{ where: { id: req.params.id }});
     res.status(200).json(newPost);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const delPost = await Post.destroy({where: { id: req.params.id }});
+    res.status(200).json(delPost);
+  } catch (err) {
+    res.status(500).json(err)
   }
 })
 
