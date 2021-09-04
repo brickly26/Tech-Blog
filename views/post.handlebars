@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+    {{post.title}}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{post.body}}</p>
+      <footer class="blockquote-footer">{{post.user.username}} posted on" <cite title="Source Title">{{format_date post.createdAt}}</cite></footer>
+    </blockquote>
+  </div>
+</div>
+<div class="container m-3">
+  {{#each post.comments as |comment|}}
+  <div class="card">
+    <div class="card-header">
+      <span class="blockquote-footer">{{comment.user.username}} posted on" <cite title="Source Title">{{format_date comment.createdAt}}</cite></span>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{comment.body}}</p>
+      </blockquote>
+    </div>
+  </div>
+  {{/each}}
+</div>

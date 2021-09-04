@@ -1,0 +1,13 @@
+{{#each posts as |post| }}
+<div class="card m-3">
+  <div class="card-header">
+    {{post.title}}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{post.body}}</p>
+      <footer class="blockquote-footer">{{post.user.username}} posted on: <cite title="Source Title">{{post.createdAt}}</cite></footer>
+    </blockquote>
+  </div>
+</div>
+{{/each}}
