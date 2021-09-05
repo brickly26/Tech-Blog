@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
+    console.log(req.session.user_id)
     const postData = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
@@ -25,7 +26,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const newPost = await Post.update({
-      ...req.body
+      ...req.body,
+      user_id: req.session.user_id,
     },{ where: { id: req.params.id }});
     res.status(200).json(newPost);
   } catch (err) {
