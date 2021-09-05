@@ -80,8 +80,10 @@ const updatePost = () => {
     const formState = formEl.style.display;
     if (formState === "block") {
       formEl.style.display = "none"
+      this.innerText = "Update"
     } else {
       formEl.style.display = "block"
+      this.innerText = "Minimize"
     }
   }
 }

@@ -27,23 +27,16 @@ router.get('/dashboard', withAuth, async (req, res) => {
       include: { model: User },
     });
 
-    if (!postData) {
-      res.render("dashboard", {
-        logged_in: req.session.logged_in,
-        header: "Dashboard",
-      })
-    } else {
-      const posts = postData.map((post) => post.get({ plain:true }));
+    const userData = await User.findByPk(req.session.user_id);
+    const posts = postData.map((post) => post.get({ plain:true }));
+    const username = userData.username;
 
-      const username = posts[0].user.username;
-
-      res.render("dashboard", {
-        username,
-        posts,
-        logged_in: req.session.logged_in,
-        header: "Dashboard",
-      })
-      }
+    res.render("dashboard", {
+      username,
+      posts,
+      logged_in: req.session.logged_in,
+      header: "Dashboard",
+    })
   } catch (err) {
     res.status(500).json(err);
   }
